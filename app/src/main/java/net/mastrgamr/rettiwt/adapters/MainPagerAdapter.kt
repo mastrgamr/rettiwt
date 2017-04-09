@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import net.mastrgamr.rettiwt.Constants
-import net.mastrgamr.rettiwt.views.fragments.BlankFragment
 import net.mastrgamr.rettiwt.views.fragments.BlankFragment2
 import net.mastrgamr.rettiwt.views.fragments.MainFragment
+import net.mastrgamr.rettiwt.views.fragments.NotificationFragment
 
 /**
  * Project: Rettiwt
@@ -24,7 +24,7 @@ class MainPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
                 return MainFragment.newInstance("Page # 1")
             }
             Constants.PAGE_TWO -> { // Fragment # 0 - This will show FirstFragment different title
-                return BlankFragment.newInstance("Page # 2")
+                return NotificationFragment.newInstance("Page # 2")
             }
             Constants.PAGE_THREE -> { // Fragment # 1 - This will show SecondFragment
                 return BlankFragment2.newInstance("Page # 3")

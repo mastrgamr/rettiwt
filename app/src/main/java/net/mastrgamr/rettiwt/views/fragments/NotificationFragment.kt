@@ -1,12 +1,15 @@
 package net.mastrgamr.rettiwt.views.fragments
 
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import net.mastrgamr.rettiwt.R
+import net.mastrgamr.rettiwt.databinding.FragmentNotificationBinding
+import net.mastrgamr.rettiwt.viewmodels.NotificationFragmentViewModel
 
 
 /**
@@ -14,10 +17,13 @@ import net.mastrgamr.rettiwt.R
  * Use the [BlankFragment2.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BlankFragment : Fragment() {
+class NotificationFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
+
+    private var binding: FragmentNotificationBinding? = null
+    private var notifFragmentVM: NotificationFragmentViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +34,13 @@ class BlankFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_blank, container, false)
+        // Inflate the layout and attach the ViewModel for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notification, container, false)
+        val view: View = binding!!.root
+        notifFragmentVM = NotificationFragmentViewModel(context)
+        binding!!.vm = notifFragmentVM
+
+        return view
     }
 
     companion object {
@@ -46,8 +57,8 @@ class BlankFragment : Fragment() {
          * @return A new instance of fragment BlankFragment2.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String): BlankFragment {
-            val fragment = BlankFragment()
+        fun newInstance(param1: String): NotificationFragment {
+            val fragment = NotificationFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             fragment.arguments = args
