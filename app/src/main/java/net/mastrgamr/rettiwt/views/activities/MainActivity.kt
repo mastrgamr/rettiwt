@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_main.*
 import net.mastrgamr.rettiwt.Constants
 import net.mastrgamr.rettiwt.R
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
 
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         val pager = findViewById(R.id.pager) as ViewPager
