@@ -8,11 +8,14 @@ import android.support.v4.view.ViewPager
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Menu
 import kotlinx.android.synthetic.main.activity_main.*
 import net.mastrgamr.rettiwt.Constants
 import net.mastrgamr.rettiwt.R
 import net.mastrgamr.rettiwt.adapters.MainPagerAdapter
 import net.mastrgamr.rettiwt.views.fragments.MainFragment
+
+
 
 
 class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionListener, OnPageChangeListener {
@@ -56,6 +59,12 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
             }
         }
         false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     override fun onPageScrollStateChanged(state: Int) {

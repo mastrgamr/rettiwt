@@ -3,8 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="net.mastrgamr.rettiwt.SampleActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/actions_dm"
+        android:orderInCategory="0"
+        android:title="@string/action_notifications"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        app:showAsAction="always"/>
+
+    <!-- TODO: Possibly make a setting 'tab' and not an icon in the toolbar -->
+    <!--<item-->
+        <!--android:id="@+id/action_settings"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_settings"-->
+        <!--app:showAsAction="never" />-->
 </menu>
