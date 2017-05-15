@@ -5,13 +5,13 @@
     android:id="@+id/notification_fragment">
 
     <data>
-        <variable name="vm" type="net.mastrgamr.rettiwt.viewmodels.NotificationFragmentViewModel" />
+        <variable name="vm" type="net.mastrgamr.rettiwt.viewmodels.NearbyFragmentViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="net.mastrgamr.rettiwt.views.fragments.NotificationFragment">
+        tools:context="net.mastrgamr.rettiwt.views.fragments.NearbyFragment">
 
         <TextView
             android:layout_width="wrap_content"

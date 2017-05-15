@@ -34,7 +34,6 @@ class MainFragmentViewModel(private var c: Context) {
 //            override fun failure(exception: TwitterException?) {
 //                println("FAILURE!")
 //            }
-//
 //        })
         username = Twitter.getSessionManager().activeSession.userName
         TwitterCore.getInstance().apiClient.statusesService.homeTimeline(10, null, null, true, true, false, false)

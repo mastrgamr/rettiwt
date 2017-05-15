@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import net.mastrgamr.rettiwt.R
-import net.mastrgamr.rettiwt.databinding.FragmentMainBinding
+import net.mastrgamr.rettiwt.databinding.FragmentTimelineBinding
 import net.mastrgamr.rettiwt.viewmodels.MainFragmentViewModel
 
 /**
@@ -27,7 +27,7 @@ class MainFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
-    private var binding: FragmentMainBinding? = null
+    private var binding: FragmentTimelineBinding? = null
     private var mainFragmentVM: MainFragmentViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout and attach the ViewModel for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timeline, container, false)
         val view: View = binding!!.root
         mainFragmentVM = MainFragmentViewModel(context)
         binding!!.vm = mainFragmentVM

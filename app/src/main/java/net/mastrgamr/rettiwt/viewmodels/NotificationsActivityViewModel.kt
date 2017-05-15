@@ -6,16 +6,16 @@ import android.util.Log
 /**
  * Project: rettiwt
  * Written by: mastrgamr
- * Date: 4/8/17
+ * Date: 5/14/17
  */
-class NotificationFragmentViewModel(private var c: Context) {
+class NotificationsActivityViewModel(private var c: Context) {
 
     private val TAG = javaClass.simpleName
 
-    private var text = "Loading Notifications."
+    private var text = "Loading Your Notifications."
 
     init {
-        Log.d(TAG, "Loading Notifications.")
+        Log.d(TAG, "Loading updates.")
     }
 
     fun getText(): String {
