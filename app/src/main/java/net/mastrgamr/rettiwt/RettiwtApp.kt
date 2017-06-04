@@ -3,6 +3,7 @@ package net.mastrgamr.rettiwt
 import android.app.Application
 import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
+import es.dmoral.prefs.Prefs
 import io.fabric.sdk.android.Fabric
 
 /**
