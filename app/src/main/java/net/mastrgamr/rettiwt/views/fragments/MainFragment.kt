@@ -5,10 +5,13 @@ import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import net.mastrgamr.rettiwt.R
+import net.mastrgamr.rettiwt.adapters.TimelineAdapter
 import net.mastrgamr.rettiwt.databinding.FragmentTimelineBinding
 import net.mastrgamr.rettiwt.viewmodels.MainFragmentViewModel
 
@@ -44,6 +47,21 @@ class MainFragment : Fragment() {
         val view: View = binding!!.root
         mainFragmentVM = MainFragmentViewModel(context)
         binding!!.vm = mainFragmentVM
+
+        val recView: RecyclerView = view.findViewById(R.id.timeline_recview) as RecyclerView
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recView.setHasFixedSize(true)
+
+        // use a linear layout manager
+        recView.layoutManager = LinearLayoutManager(activity)
+
+        val dataset: ArrayList<String> = ArrayList()
+        (1..50).mapTo(dataset) { "Hey: #" + it }
+
+        // specify an adapter (see also next example)
+        val timelineAdapter = TimelineAdapter(dataset)
+        recView.adapter = timelineAdapter
 
         return view
     }
