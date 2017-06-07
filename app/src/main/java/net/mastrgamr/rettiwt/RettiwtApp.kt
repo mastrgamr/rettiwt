@@ -1,10 +1,13 @@
 package net.mastrgamr.rettiwt
 
 import android.app.Application
-import com.twitter.sdk.android.Twitter
+import android.util.Log
+import com.twitter.sdk.android.core.DefaultLogger
+import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
-import es.dmoral.prefs.Prefs
-import io.fabric.sdk.android.Fabric
+import com.twitter.sdk.android.core.TwitterConfig
+
+
 
 /**
  * Project: Rettiwt
@@ -16,8 +19,11 @@ class RettiwtApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val authConfig = TwitterAuthConfig(resources.getString(R.string.TWITTER_KEY),
-                                            resources.getString(R.string.TWITTER_SECRET))
-        Fabric.with(this, Twitter(authConfig))
+        val config = TwitterConfig.Builder(this)
+                .logger(DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(TwitterAuthConfig(getString(R.string.TWITTER_KEY), getString(R.string.TWITTER_SECRET)))
+                .debug(true)
+                .build()
+        Twitter.initialize(config)
     }
 }

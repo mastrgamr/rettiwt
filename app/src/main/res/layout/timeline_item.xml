@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
+    <data>
+        <variable name="vm" type="net.mastrgamr.rettiwt.viewmodels.TimelineItemViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Some text" />
-</FrameLayout>
+        android:layout_margin="4dp"
+        android:clickable="true"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text"
+                android:text="@{vm.tweet}" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user"
+                android:text="@{vm.user}"
+                android:layout_below="@+id/text"
+                android:paddingTop="4dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

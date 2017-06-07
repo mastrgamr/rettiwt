@@ -6,10 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.twitter.sdk.android.core.models.Tweet
 import net.mastrgamr.rettiwt.R
 import net.mastrgamr.rettiwt.adapters.TimelineAdapter
 import net.mastrgamr.rettiwt.databinding.FragmentTimelineBinding
@@ -23,7 +23,7 @@ import net.mastrgamr.rettiwt.viewmodels.MainFragmentViewModel
  * Use the [MainFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainFragmentViewModel.TimelineRefreshListener {
 
     // TODO: Rename and change types of parameters
     private var text: String? = null
@@ -32,6 +32,8 @@ class MainFragment : Fragment() {
 
     private var binding: FragmentTimelineBinding? = null
     private var mainFragmentVM: MainFragmentViewModel? = null
+
+    private var timelineAdapter = TimelineAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,32 +47,19 @@ class MainFragment : Fragment() {
         // Inflate the layout and attach the ViewModel for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timeline, container, false)
         val view: View = binding!!.root
-        mainFragmentVM = MainFragmentViewModel(context)
+        mainFragmentVM = MainFragmentViewModel(this)
         binding!!.vm = mainFragmentVM
 
-        val recView: RecyclerView = view.findViewById(R.id.timeline_recview) as RecyclerView
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recView.setHasFixedSize(true)
-
-        // use a linear layout manager
-        recView.layoutManager = LinearLayoutManager(activity)
-
-        val dataset: ArrayList<String> = ArrayList()
-        (1..50).mapTo(dataset) { "Hey: #" + it }
-
-        // specify an adapter (see also next example)
-        val timelineAdapter = TimelineAdapter(dataset)
-        recView.adapter = timelineAdapter
-
-        return view
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
+        binding!!.timelineRecview.apply {
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
+            // specify an adapter (see also next example)
+            mainFragmentVM!!.getTweets()
+            adapter = timelineAdapter
         }
+        return view
     }
 
     override fun onAttach(context: Context?) {
@@ -87,12 +76,15 @@ class MainFragment : Fragment() {
         mListener = null
     }
 
+    override fun onTimelineRefresh(tweets: List<Tweet>) {
+        timelineAdapter.updateItems(tweets)
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     *
      *
      * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
@@ -108,7 +100,7 @@ class MainFragment : Fragment() {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
-
+         *
          * @param param1 Parameter 1.
          * *
          * @return A new instance of fragment MainFragment.
