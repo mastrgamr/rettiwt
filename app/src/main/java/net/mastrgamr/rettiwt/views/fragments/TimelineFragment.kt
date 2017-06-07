@@ -1,8 +1,6 @@
 package net.mastrgamr.rettiwt.views.fragments
 
-import android.content.Context
 import android.databinding.DataBindingUtil
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,25 +11,20 @@ import com.twitter.sdk.android.core.models.Tweet
 import net.mastrgamr.rettiwt.R
 import net.mastrgamr.rettiwt.adapters.TimelineAdapter
 import net.mastrgamr.rettiwt.databinding.FragmentTimelineBinding
-import net.mastrgamr.rettiwt.viewmodels.MainFragmentViewModel
+import net.mastrgamr.rettiwt.viewmodels.TimelineFragmentViewModel
 
 /**
  * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MainFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MainFragment.newInstance] factory method to
+ *
+ * Use the [TimelineFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MainFragment : Fragment(), MainFragmentViewModel.TimelineRefreshListener {
+class TimelineFragment : Fragment(), TimelineFragmentViewModel.TimelineRefreshListener {
 
-    // TODO: Rename and change types of parameters
     private var text: String? = null
 
-    private var mListener: OnFragmentInteractionListener? = null
-
     private var binding: FragmentTimelineBinding? = null
-    private var mainFragmentVM: MainFragmentViewModel? = null
+    private var timelineFragmentVM: TimelineFragmentViewModel? = null
 
     private var timelineAdapter = TimelineAdapter()
 
@@ -47,8 +40,8 @@ class MainFragment : Fragment(), MainFragmentViewModel.TimelineRefreshListener {
         // Inflate the layout and attach the ViewModel for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timeline, container, false)
         val view: View = binding!!.root
-        mainFragmentVM = MainFragmentViewModel(this)
-        binding!!.vm = mainFragmentVM
+        timelineFragmentVM = TimelineFragmentViewModel(this)
+        binding!!.vm = timelineFragmentVM
 
         binding!!.timelineRecview.apply {
             // use this setting to improve performance if you know that changes
@@ -56,41 +49,14 @@ class MainFragment : Fragment(), MainFragmentViewModel.TimelineRefreshListener {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             // specify an adapter (see also next example)
-            mainFragmentVM!!.getTweets()
+            timelineFragmentVM!!.getTweets()
             adapter = timelineAdapter
         }
         return view
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            mListener = context as OnFragmentInteractionListener?
-        } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
     override fun onTimelineRefresh(tweets: List<Tweet>) {
         timelineAdapter.updateItems(tweets)
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
@@ -105,8 +71,8 @@ class MainFragment : Fragment(), MainFragmentViewModel.TimelineRefreshListener {
          * *
          * @return A new instance of fragment MainFragment.
          */
-        fun newInstance(param1: String): MainFragment {
-            val fragment = MainFragment()
+        fun newInstance(param1: String): TimelineFragment {
+            val fragment = TimelineFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             fragment.arguments = args

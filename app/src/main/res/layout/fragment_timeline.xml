@@ -5,13 +5,13 @@
     android:id="@+id/fragment_main">
 
     <data>
-        <variable name="vm" type="net.mastrgamr.rettiwt.viewmodels.MainFragmentViewModel" />
+        <variable name="vm" type="net.mastrgamr.rettiwt.viewmodels.TimelineFragmentViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="net.mastrgamr.rettiwt.views.fragments.MainFragment">
+        tools:context="net.mastrgamr.rettiwt.views.fragments.TimelineFragment">
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -19,12 +19,6 @@
             android:layout_gravity="center"
             android:visibility="@{vm.isLoading()}" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{vm.username}"
-            android:visibility="invisible"
-            />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/timeline_recview"
             android:layout_width="match_parent"

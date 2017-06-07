@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import net.mastrgamr.rettiwt.Constants
+import net.mastrgamr.rettiwt.views.fragments.TimelineFragment
 import net.mastrgamr.rettiwt.views.fragments.YouFragment
-import net.mastrgamr.rettiwt.views.fragments.MainFragment
 import net.mastrgamr.rettiwt.views.fragments.NearbyFragment
 
 /**
@@ -21,7 +21,7 @@ class MainPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment? {
         when (position) {
             Constants.PAGE_ONE -> { // Fragment # 0 - This will show FirstFragment
-                return MainFragment.newInstance("Page # 1")
+                return TimelineFragment()
             }
             Constants.PAGE_TWO -> { // Fragment # 0 - This will show FirstFragment different title
                 return NearbyFragment.newInstance("Page # 2")
@@ -36,7 +36,4 @@ class MainPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return NUM_ITEMS
     }
-
-
-
 }

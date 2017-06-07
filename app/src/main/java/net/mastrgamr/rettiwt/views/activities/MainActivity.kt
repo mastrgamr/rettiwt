@@ -1,7 +1,6 @@
 package net.mastrgamr.rettiwt.views.activities
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentPagerAdapter
@@ -16,9 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.mastrgamr.rettiwt.Constants
 import net.mastrgamr.rettiwt.R
 import net.mastrgamr.rettiwt.adapters.MainPagerAdapter
-import net.mastrgamr.rettiwt.views.fragments.MainFragment
 
-class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionListener, OnPageChangeListener {
+class MainActivity : AppCompatActivity(), OnPageChangeListener {
 
     private val TAG: String = javaClass.simpleName
 
@@ -36,10 +34,6 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
         pager.addOnPageChangeListener(this)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         pager.adapter = pagerAdapter
-    }
-
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     /* INNER INTERFACES */
@@ -80,13 +74,9 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
         }
     }
 
-    override fun onPageScrollStateChanged(state: Int) {
-//        Log.d(TAG, "State changed: " + state)
-    }
+    override fun onPageScrollStateChanged(state: Int) { }
 
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-//        Log.d(TAG, "Page scrolled: " + position)
-    }
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
 
     override fun onPageSelected(position: Int) {
         Log.d(TAG, "Page selected: " + position)

@@ -7,13 +7,12 @@ import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
 
-
-
 /**
  * Project: Rettiwt
  * Written by: mastrgamr
  * Date: 4/3/17
  */
+
 class RettiwtApp: Application() {
 
     override fun onCreate() {

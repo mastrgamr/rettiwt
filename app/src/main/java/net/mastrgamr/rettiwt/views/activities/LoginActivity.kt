@@ -26,8 +26,9 @@ class LoginActivity : Activity() {
         setContentView(R.layout.activity_login)
 
         //if an access token is defined in the preferences
-        //skip the login flow alltogther and start the main app
-        if(Prefs.with(this).read("access_token") != null){
+        //skip the login flow altogether and start the main app
+        if(Prefs.with(this).read("access_token").isNotEmpty()){
+            Log.d(TAG, "Token found, start Main app.")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

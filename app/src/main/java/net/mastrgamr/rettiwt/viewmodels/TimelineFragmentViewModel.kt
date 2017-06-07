@@ -15,16 +15,11 @@ import com.twitter.sdk.android.core.models.Tweet
  * Date: 3/31/17
  */
 
-class MainFragmentViewModel(var timelineRefreshListener: TimelineRefreshListener) {
+class TimelineFragmentViewModel(var timelineRefreshListener: TimelineRefreshListener) {
 
     private val TAG = javaClass.simpleName
 
     var isLoading: ObservableInt = ObservableInt(View.VISIBLE)
-    var username = "Loading."
-
-    init {
-        username = TwitterCore.getInstance().sessionManager.activeSession.userName //TODO -- remove soon
-    }
 
     fun getTweets() {
         TwitterCore.getInstance().apiClient.statusesService.homeTimeline(10, null, null, false, true, false, false)
