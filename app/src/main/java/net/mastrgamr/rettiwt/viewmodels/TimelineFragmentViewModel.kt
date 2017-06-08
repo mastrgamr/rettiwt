@@ -15,7 +15,7 @@ import com.twitter.sdk.android.core.models.Tweet
  * Date: 3/31/17
  */
 
-class TimelineFragmentViewModel(var timelineRefreshListener: TimelineRefreshListener) {
+class TimelineFragmentViewModel(val timelineRefreshListener: TimelineRefreshListener) {
 
     private val TAG = javaClass.simpleName
 

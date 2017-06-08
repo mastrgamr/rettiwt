@@ -10,7 +10,6 @@ import net.mastrgamr.rettiwt.R
 import net.mastrgamr.rettiwt.databinding.TimelineItemBinding
 import net.mastrgamr.rettiwt.viewmodels.TimelineItemViewModel
 
-
 /**
  * Project: rettiwt
  * Written by: mastrgamr
@@ -36,7 +35,6 @@ class TimelineAdapter(var items: List<Tweet>) : RecyclerView.Adapter<TimelineAda
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TimelineAdapter.TimelineViewHolder {
-        // create a new view
         val inflater = parent!!.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val binding: TimelineItemBinding = DataBindingUtil.inflate(inflater, R.layout.timeline_item, parent, false)
         binding.vm = TimelineItemViewModel()
