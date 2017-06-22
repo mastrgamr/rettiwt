@@ -22,10 +22,6 @@ class MainFragmentViewModel(var timelineRefreshListener: TimelineRefreshListener
     var isLoading: ObservableInt = ObservableInt(View.VISIBLE)
     var username = "Loading."
 
-    init {
-        username = TwitterCore.getInstance().sessionManager.activeSession.userName //TODO -- remove soon
-    }
-
     fun getTweets() {
         TwitterCore.getInstance().apiClient.statusesService.homeTimeline(10, null, null, false, true, false, false)
                 .enqueue(object : Callback<List<Tweet>>() {

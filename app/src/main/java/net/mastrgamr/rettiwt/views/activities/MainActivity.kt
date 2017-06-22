@@ -4,21 +4,17 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
-import net.mastrgamr.rettiwt.Constants
 import net.mastrgamr.rettiwt.R
-import net.mastrgamr.rettiwt.adapters.MainPagerAdapter
 import net.mastrgamr.rettiwt.views.fragments.MainFragment
+import net.mastrgamr.rettiwt.views.fragments.NearbyFragment
+import net.mastrgamr.rettiwt.views.fragments.YouFragment
 
-class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionListener, OnPageChangeListener {
+class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionListener {
 
     private val TAG: String = javaClass.simpleName
 
@@ -27,15 +23,14 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
         setContentView(R.layout.activity_main)
 
         val toolbar = findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
-        val pager = findViewById(R.id.pager) as ViewPager
-        val pagerAdapter: FragmentPagerAdapter = MainPagerAdapter(supportFragmentManager)
 
-        pager.addOnPageChangeListener(this)
+        setSupportActionBar(toolbar)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        pager.adapter = pagerAdapter
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, MainFragment.newInstance("Oi"))
+                .commit()
     }
 
     override fun onFragmentInteraction(uri: Uri) {
@@ -43,18 +38,28 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
     }
 
     /* INNER INTERFACES */
+    //TODO -- implement some sort o stack-tracker to highlight the correct nav item onBackPressed()
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                pager.currentItem = Constants.PAGE_ONE
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.main_container, MainFragment.newInstance("Oi"))
+                        .addToBackStack(null)
+                        .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_nearby -> {
-                pager.currentItem = Constants.PAGE_TWO
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.main_container, NearbyFragment.newInstance("Oi"))
+                        .addToBackStack(null)
+                        .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_you -> {
-                pager.currentItem = Constants.PAGE_THREE
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.main_container, YouFragment.newInstance("Oi"))
+                        .addToBackStack(null)
+                        .commit()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -79,29 +84,4 @@ class MainActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
-    override fun onPageScrollStateChanged(state: Int) {
-//        Log.d(TAG, "State changed: " + state)
-    }
-
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-//        Log.d(TAG, "Page scrolled: " + position)
-    }
-
-    override fun onPageSelected(position: Int) {
-        Log.d(TAG, "Page selected: " + position)
-
-        when(position) {
-            Constants.PAGE_ONE -> {
-                navigation.selectedItemId = R.id.navigation_home
-            }
-            Constants.PAGE_TWO -> {
-                navigation.selectedItemId = R.id.navigation_nearby
-            }
-            Constants.PAGE_THREE -> {
-                navigation.selectedItemId = R.id.navigation_you
-            }
-        }
-    }
-
 }

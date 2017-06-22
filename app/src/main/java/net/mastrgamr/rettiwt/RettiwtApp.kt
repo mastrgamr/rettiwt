@@ -8,7 +8,6 @@ import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
 
 
-
 /**
  * Project: Rettiwt
  * Written by: mastrgamr

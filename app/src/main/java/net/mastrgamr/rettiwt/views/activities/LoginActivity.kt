@@ -27,7 +27,7 @@ class LoginActivity : Activity() {
 
         //if an access token is defined in the preferences
         //skip the login flow alltogther and start the main app
-        if(Prefs.with(this).read("access_token") != null){
+        if(Prefs.with(this).read("access_token").isNotEmpty()){
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
